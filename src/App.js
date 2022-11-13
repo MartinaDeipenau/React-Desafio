@@ -1,4 +1,4 @@
-import Header from './components/Header'
+import NavBar from './components/NavBar'
 import './App.css'
 import React from 'react'
 
@@ -7,7 +7,7 @@ import React from 'react'
 const App = () => {
   return (
     <>
-    <Header/>
+    <NavBar/>
     </>
   )
 }
