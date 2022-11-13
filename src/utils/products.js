@@ -135,3 +135,20 @@
         description: "De 3kg. Pollo y salmon."
     }
 ]
+
+export const getProducts = (category) =>
+new Promise((res, rej) => {
+  const response = category
+  ? products.filter((p) => p.category === category)
+  : products;
+  setTimeout(() => {
+    res(response);
+  }, 2000);
+});
+
+export const getProduct = (productId) => new Promise((res, rej) => {
+  const response = products.find((product) => product.id == productId);
+  setTimeout(() => {
+    res(response);
+  }, 2000);
+});

@@ -1,37 +1,40 @@
-import ItemCount from './ItemCount'
-import ItemList from './ItemList'
-import customFetch from './utils/customFetch'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
-const { products } = require('./utils/products')
+import Item from './Item';
+import { getProducts } from '../utils/products';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 
 const ItemListContainer = () => {
-    const [datos, setDatos] = useState([]);
-    const { idCategory } = useParams();
+    const [products, setProducts] = useState([]);
+    const { CategoryId } = useParams();
 
-    console.log(idCategory);
-
+    console.log(CategoryId);
 
     useEffect(() => {
-        customFetch(2000, products.filter(item => {
-            if (idCategory === undefined) return item;
-            return item.categoryId === parseInt(idCategory)
-        }))
-            .then(result => setDatos(result))
-            .catch(err => console.log(err))
-    }, [datos]);
-
-    const onAdd = (qty) => {
-        alert("Se agrego" + qty + " items.");
-    }
+        setProducts([])
+        getProducts(CategoryId)
+            .then(result => setProducts(result))
+            .catch(error => console.log(error))
+    }, [CategoryId])
 
     return (
-        <>
-            <ItemList items={datos} />
-            <ItemCount stock={7} initial={1} onAdd={onAdd} />
-        </>
+        <div className="products container d-flex flex-wrap justify-content-center">
+            {products.map((producto) => {
+                return (
+                    <Item
+                        key={producto.id}
+                        image={producto.imagen}
+                        title={producto.titulo}
+                        price={producto.precio}
+                        categoryId={producto.categoria}
+                        stock={producto.stock}
+                        description={producto.descripcion}
+                    />
+                );
+            })}
+        </div>
     );
 }
-export default ItemListContainer
+
+export default ItemListContainer;
 
