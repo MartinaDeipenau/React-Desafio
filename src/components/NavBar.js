@@ -1,25 +1,20 @@
-import { BsBag } from "react-icons/bs";
+import { BsBag } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
+import Cart from './Cart'
 
 const NavBar = () => {
     return (
         <>
-        <header className="header">
-        <p className="Logo"> LOLA Cat Shop</p>
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Accesorios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Camas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Alimento</a>
-                </li>
-            </ul>
-            <BsBag/>
+            <header className="header">
+                <Logo><Link to='/'> LOLA Cat Shop </Link></Logo>
+                <menuItem><Link to='/category/2'> Accesorios </Link></menuItem>
+                <menuItem><Link to='/category/1'> Camas </Link></menuItem>
+                <menuItem><Link to='/category/3'> Alimentos </Link></menuItem>
+                <BsBag />
+                <menuitem><Cart /></menuitem>
             </header>
         </>
-        
+
     )
 }
-export default NavBar;
+export default NavBar
